@@ -2,8 +2,9 @@ import unittest
 
 from axiom import\
   zero, is_zero, prev, next,\
-  counting, up_to, add, dist,\
-  gt, eq, mult, div, exp
+  counting, up_to, at, add, dist,\
+  gt, eq, mult, div, exp,\
+  fib
 
 class TestIsZero(unittest.TestCase):
   def testIsZero(self):
@@ -31,6 +32,14 @@ class TestUpTo(unittest.TestCase):
     self.assertTrue(is_zero(prev(r.next())), "1")
     self.assertTrue(is_zero(prev(prev(r.next()))), "2")
     self.assertRaises(Exception, r.next)
+
+class TestAt(unittest.TestCase):
+  def testWithFib(self):
+    self.assertTrue(eq(at(fib(), zero()), zero()), "fib[0] = 0")
+    self.assertTrue(eq(at(fib(), next(zero())), next(zero())), "fib[1] = 1")
+    three = next(next(next(zero())))
+    twelve = mult(three, next(three))
+    self.assertTrue(eq(at(fib(), twelve), mult(twelve, twelve)), "fib[12] = 144")
 
 class TestAdd(unittest.TestCase):
   def testAdd(self):
@@ -94,5 +103,23 @@ class TestExp(unittest.TestCase):
         exp(next(next(zero())), next(next(zero())))
       ))))
     ), "2^2 = 4")
+
+class TestFib(unittest.TestCase):
+  def testFib(self):
+    fibs = fib()
+    a = next(zero())
+    b = add(a,a)
+    c = add(a,b)
+    d = add(b,c)
+    e = add(c,d)
+    f = add(d,e)
+    self.assertTrue(eq(fibs.next(), zero()), 'fib[0] = 0')
+    self.assertTrue(eq(fibs.next(), a), 'fib[1] = 1')
+    self.assertTrue(eq(fibs.next(), a), 'fib[1] = 1')
+    self.assertTrue(eq(fibs.next(), b), 'fib[1] = 2')
+    self.assertTrue(eq(fibs.next(), c), 'fib[1] = 3')
+    self.assertTrue(eq(fibs.next(), d), 'fib[1] = 5')
+    self.assertTrue(eq(fibs.next(), e), 'fib[1] = 8')
+    self.assertTrue(eq(fibs.next(), f), 'fib[1] = 13')
 
 unittest.main()

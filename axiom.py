@@ -40,6 +40,13 @@ def up_to(to):
     val = next(val)
     to = prev(to)
 
+def at(g, to):
+  """to-th object in the given generator, from zero."""
+  while not is_zero(to):
+    to = prev(to)
+    g.next()
+  return g.next()
+
 def add(left, right):
   """Left plus right."""
   step = lambda (left, right): (next(left), prev(right))
@@ -97,6 +104,16 @@ def exp(b, p):
   for _ in up_to(p):
     out = mult(out, b)
   return out
+
+def fib():
+  """Fibonacci numbers beginning with zero."""
+  a = zero()
+  b = next(zero())
+  yield a
+  yield b
+  while 1:
+    a, b = b, add(a, b)
+    yield b
 
 if __name__ == '__main__':
   unittest.main()
