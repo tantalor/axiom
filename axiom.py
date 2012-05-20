@@ -101,7 +101,8 @@ def exp(b, p):
   if is_zero(p) and is_zero(b):
     raise Exception("Cannot raise zero to zero")
   out = next(zero())
-  for _ in up_to(p):
+  while not is_zero(p):
+    p = prev(p)
     out = mult(out, b)
   return out
 
