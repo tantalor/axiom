@@ -107,12 +107,9 @@ def exp(b, p):
 
 def fib():
   """Fibonacci numbers beginning with zero."""
-  a = zero()
-  b = next(zero())
-  yield a
-  yield b
-  while 1:
-    a, b = b, add(a, b)
+  step = lambda (a, b): (b, add(a,b))
+  yield zero()
+  for (a, b) in compose(step, (zero(), next(zero()))):
     yield b
 
 if __name__ == '__main__':
