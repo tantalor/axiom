@@ -96,6 +96,15 @@ def div(n, d):
       else:
         n = prev(n)
 
+def fib():
+  """Fibonacci numbers beginning with zero."""
+  step = lambda (a, b): (b, add(a,b))
+  yield zero()
+  for (a, b) in compose(step, (zero(), next(zero()))):
+    yield 
+
+## 4
+
 def exp(b, p):
   """Left times left times left, etc. right times."""
   if is_zero(p) and is_zero(b):
@@ -105,13 +114,6 @@ def exp(b, p):
     p = prev(p)
     out = mult(out, b)
   return out
-
-def fib():
-  """Fibonacci numbers beginning with zero."""
-  step = lambda (a, b): (b, add(a,b))
-  yield zero()
-  for (a, b) in compose(step, (zero(), next(zero()))):
-    yield b
 
 if __name__ == '__main__':
   unittest.main()
