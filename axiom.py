@@ -89,7 +89,7 @@ def div(n, d):
         n = prev(n)
 
 def fib():
-  """Fibonacci numbers beginning with zero."""
+  """Yields fibonacci numbers: 0, 1, 1, 2, 3, 5, 8, 13, etc."""
   step = lambda (a, b): (b, add(a,b))
   yield zero()
   for (a, b) in compose(step, (zero(), next(zero()))):
