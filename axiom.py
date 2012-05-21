@@ -1,7 +1,7 @@
 ## 0 (universe)
 
 def compose(step, arg):
-  """Yields the step composed with itself on the argument."""
+  """Yields arg, step(arg), step(step(arg)), etc."""
   while True:
     yield arg
     arg = step(arg)
@@ -29,7 +29,7 @@ def prev(arg):
 ## 2
 
 def counting():
-  """Yields next objects from zero."""
+  """Yields zero(), next(zero()), next(next(zero())), etc."""
   return compose(next, zero())
 
 def up_to(to):
