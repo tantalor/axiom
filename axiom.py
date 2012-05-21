@@ -77,14 +77,6 @@ def eq(left, right):
   """True if left and right are the same values"""
   return is_zero(dist(left, right))
 
-def mult(left, right):
-  """Left times right."""
-  if is_zero(left): return zero()
-  step = lambda (right, result): (prev(right), add(result, left))
-  for (right, result) in compose(step, (right, zero())):
-    if is_zero(right):
-      return result
-
 def div(n, d):
   """Quotient (q) and remainder (r) such that q*n+r = d"""
   if is_zero(d):
@@ -112,6 +104,19 @@ def multiples(n):
 
 ## 4
 
+def mult(left, right):
+  """Left times right."""
+  if is_zero(right): return zero()
+  return at(multiples(left), prev(right))
+
+def fact():
+  """Yields factorial numbers: 1, 1, 2, 6, 24, 120, etc."""
+  step = lambda (n, f): (next(n), mult(n, f))
+  for (n, f) in compose(step, (next(zero()), next(zero()))):
+    yield f
+
+## 5
+
 def exp(b, p):
   """Left times left times left, etc. right times."""
   if is_zero(p) and is_zero(b):
@@ -121,9 +126,3 @@ def exp(b, p):
     p = prev(p)
     out = mult(out, b)
   return out
-
-def fact():
-  """Yields factorial numbers: 1, 1, 2, 6, 24, 120, etc."""
-  step = lambda (n, f): (next(n), mult(n, f))
-  for (n, f) in compose(step, (next(zero()), next(zero()))):
-    yield f
