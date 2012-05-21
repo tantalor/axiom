@@ -97,10 +97,7 @@ def fib():
 
 def multiples(n):
   """Yields n, 2n, 3n, 4n, etc."""
-  m = zero()
-  while 1:
-    m = add(m,n)
-    yield m
+  return compose(lambda m: add(m,n), n)
 
 ## 4
 
