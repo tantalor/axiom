@@ -103,6 +103,13 @@ def fib():
   for (a, b) in compose(step, (zero(), next(zero()))):
     yield b
 
+def multiples(n):
+  """Yields n, 2n, 3n, 4n, etc."""
+  m = zero()
+  while 1:
+    m = add(m,n)
+    yield m
+
 ## 4
 
 def exp(b, p):
