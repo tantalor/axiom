@@ -117,6 +117,13 @@ def fact():
 
 ## 5
 
+def powers(n):
+  """Yields n, n^2, n^3, etc."""
+  out = next(zero())
+  while 1:
+    out = mult(out, n)
+    yield out
+
 def exp(b, p):
   """Left times left times left, etc. right times."""
   if is_zero(p) and is_zero(b):

@@ -4,7 +4,7 @@ from axiom import\
   zero, is_zero, prev, next,\
   counting, up_to, at, add, dist,\
   gt, eq, mult, div, exp,\
-  fib, fact, multiples
+  fib, fact, multiples, powers
 
 class TestIsZero(unittest.TestCase):
   def testIsZero(self):
@@ -110,6 +110,24 @@ class TestMultiples(unittest.TestCase):
     self.assertTrue(eq(ms.next(), three), "1 * 3 = 3")
     self.assertTrue(eq(ms.next(), add(three, three)), "2 * 3 = 6")
     self.assertTrue(eq(ms.next(), add(add(three, three), three)), "3 * 3 = 9")
+
+class TestPowers(unittest.TestCase):
+  def testPowersOfZero(self):
+    ps = powers(zero())
+    self.assertTrue(eq(ps.next(), zero()), "0^1 = 0")
+    self.assertTrue(eq(ps.next(), zero()), "0^2 = 0")
+    self.assertTrue(eq(ps.next(), zero()), "0^3 = 0")
+  def testPowersOfOne(self):
+    ps = powers(next(zero()))
+    self.assertTrue(eq(ps.next(), next(zero())), "1^1 = 1")
+    self.assertTrue(eq(ps.next(), next(zero())), "1^2 = 1")
+    self.assertTrue(eq(ps.next(), next(zero())), "1^3 = 1")
+  def testPowers(self):
+    three = next(next(next(zero())))
+    ps = powers(three)
+    self.assertTrue(eq(ps.next(), three), "3^1 = 1")
+    self.assertTrue(eq(ps.next(), mult(three, three)), "3^2 = 9")
+    self.assertTrue(eq(ps.next(), mult(mult(three, three), three)), "3^3 = 27")
 
 class TestExp(unittest.TestCase):
   def testExp(self):
