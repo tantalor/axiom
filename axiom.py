@@ -65,9 +65,9 @@ def gt(left, right):
 
 ## 3
 
-def up_to(to):
+def up_to(to, g=None):
   """Yields to objects from the given generator."""
-  g = counting()
+  if not g: g = counting()
   for t in compose(prev, to):
     if is_zero(t): return
     yield g.next()
