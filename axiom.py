@@ -101,7 +101,7 @@ def fib():
   step = lambda (a, b): (b, add(a,b))
   yield zero()
   for (a, b) in compose(step, (zero(), next(zero()))):
-    yield 
+    yield b
 
 ## 4
 
