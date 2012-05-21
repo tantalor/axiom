@@ -118,12 +118,12 @@ def powers(n):
   """Yields n, n^2, n^3, etc."""
   return compose(lambda p: mult(p,n), n)
 
+## 6
+
 def exp(b, p):
   """Left times left times left, etc. right times."""
   if is_zero(p) and is_zero(b):
     raise Exception("Cannot raise zero to zero")
-  out = next(zero())
-  while not is_zero(p):
-    p = prev(p)
-    out = mult(out, b)
-  return out
+  if is_zero(p):
+      return next(zero())
+  return at(powers(b), prev(p))
