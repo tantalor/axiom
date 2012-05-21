@@ -114,7 +114,3 @@ def exp(b, p):
     p = prev(p)
     out = mult(out, b)
   return out
-
-if __name__ == '__main__':
-  unittest.main()
-
