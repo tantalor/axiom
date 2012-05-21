@@ -32,14 +32,6 @@ def counting():
   """Yields zero(), next(zero()), next(next(zero())), etc."""
   return compose(next, zero())
 
-def up_to(to):
-  """Yield objects from zeros up to the given object, exclusive."""
-  val = zero()
-  while not is_zero(to):
-    yield val
-    val = next(val)
-    to = prev(to)
-
 def at(g, to):
   """to-th object in the given generator, from zero."""
   while not is_zero(to):
@@ -73,20 +65,16 @@ def gt(left, right):
 
 ## 3
 
+def up_to(to):
+  """Yields to objects from the given generator."""
+  g = counting()
+  for t in compose(prev, to):
+    if is_zero(t): return
+    yield g.next()
+
 def eq(left, right):
   """True if left and right are the same values"""
   return is_zero(dist(left, right))
-
-def div(n, d):
-  """Quotient (q) and remainder (r) such that q*n+r = d"""
-  if is_zero(d):
-      raise Exception("Cannot divide by zero")
-  for q in counting():
-    for r in up_to(d):
-      if is_zero(n):
-        return (q, r)
-      else:
-        n = prev(n)
 
 def fib():
   """Yields fibonacci numbers: 0, 1, 1, 2, 3, 5, 8, 13, etc."""
@@ -100,6 +88,17 @@ def multiples(n):
   return compose(lambda m: add(m,n), n)
 
 ## 4
+
+def div(n, d):
+  """Quotient (q) and remainder (r) such that q*n+r = d"""
+  if is_zero(d):
+      raise Exception("Cannot divide by zero")
+  for q in counting():
+    for r in up_to(d):
+      if is_zero(n):
+        return (q, r)
+      else:
+        n = prev(n)
 
 def mult(left, right):
   """Left times right."""
