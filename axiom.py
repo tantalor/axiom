@@ -116,10 +116,7 @@ def fact():
 
 def powers(n):
   """Yields n, n^2, n^3, etc."""
-  out = next(zero())
-  while 1:
-    out = mult(out, n)
-    yield out
+  return compose(lambda p: mult(p,n), n)
 
 def exp(b, p):
   """Left times left times left, etc. right times."""
