@@ -34,10 +34,9 @@ def counting():
 
 def at(g, to):
   """to-th object in the given generator, from zero."""
-  while not is_zero(to):
-    to = prev(to)
+  for t in compose(prev, to):
+    if is_zero(t): return g.next()
     g.next()
-  return g.next()
 
 def add(left, right):
   """Left plus right."""
