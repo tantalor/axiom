@@ -4,7 +4,7 @@ from axiom import\
   zero, is_zero, prev, next,\
   counting, up_to, at, add, dist,\
   gt, eq, mult, div, exp,\
-  fib
+  fib, fact
 
 class TestIsZero(unittest.TestCase):
   def testIsZero(self):
@@ -121,5 +121,20 @@ class TestFib(unittest.TestCase):
     self.assertTrue(eq(fibs.next(), d), 'fib[1] = 5')
     self.assertTrue(eq(fibs.next(), e), 'fib[1] = 8')
     self.assertTrue(eq(fibs.next(), f), 'fib[1] = 13')
+
+class TestFact(unittest.TestCase):
+  def testFact(self):
+    facts = fact()
+    a = next(zero())
+    b = next(a)
+    c = next(b)
+    d = next(c)
+    e = next(d)
+    self.assertTrue(eq(facts.next(), a), "0! = 1")
+    self.assertTrue(eq(facts.next(), a), "1! = 1")
+    self.assertTrue(eq(facts.next(), b), "2! = 2")
+    self.assertTrue(eq(facts.next(), mult(b,c)), "3! = 6")
+    self.assertTrue(eq(facts.next(), mult(mult(b,c),d)), "4! = 24")
+    self.assertTrue(eq(facts.next(), mult(mult(mult(b,c),d),e)), "4! = 120")
 
 unittest.main()

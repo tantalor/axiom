@@ -114,3 +114,9 @@ def exp(b, p):
     p = prev(p)
     out = mult(out, b)
   return out
+
+def fact():
+  """Factorial numbers: 1, 1, 2, 6, 24, 120, etc."""
+  step = lambda (n, f): (next(n), mult(n, f))
+  for (n, f) in compose(step, (next(zero()), next(zero()))):
+    yield f
