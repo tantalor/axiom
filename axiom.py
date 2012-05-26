@@ -38,21 +38,22 @@ def at(g, to):
     if is_zero(t): return g.next()
     g.next()
 
-def dist(left, right):
-  """Distance between left and right."""
+def minus(left, right):
+  """Returns (left>right, |left-right|)"""
   step = lambda (l, r): (prev(l), prev(r))
   for (left, right) in compose(step, (left, right)):
-    if is_zero(left): return right
-    if is_zero(right): return left
-
-def gt(left, right):
-  """True if left is greater than right."""
-  step = lambda (l, r): (prev(l), prev(r))
-  for (left, right) in compose(step, (left, right)):
-    if is_zero(left): return False
-    if is_zero(right): return True
+    if is_zero(left): return (False, right)
+    if is_zero(right): return (True, left)
 
 ## 3
+
+def dist(left, right):
+  """Returns |left-right|"""
+  return minus(left, right)[1]
+
+def gt(left, right):
+  """Returns left > right"""
+  return minus(left, right)[0]
 
 def add(left, right):
   return at(compose(next, left), right)
@@ -64,11 +65,11 @@ def up_to(to, g=None):
     if is_zero(t): return
     yield g.next()
 
+## 4
+
 def eq(left, right):
   """True if left and right are the same values"""
   return is_zero(dist(left, right))
-
-## 4
 
 def fib():
   """Yields fibonacci numbers: 0, 1, 1, 2, 3, 5, 8, 13, etc."""
