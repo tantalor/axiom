@@ -1,10 +1,6 @@
 import unittest
 
-from axiom import\
-  zero, is_zero, prev, next,\
-  counting, up_to, at, add, dist,\
-  gt, eq, mult, div, exp,\
-  fib, fact, multiples, powers
+from axiom import *
 
 class TestIsZero(unittest.TestCase):
   def testIsZero(self):
@@ -172,5 +168,23 @@ class TestFact(unittest.TestCase):
     self.assertTrue(eq(facts.next(), mult(b,c)), "3! = 6")
     self.assertTrue(eq(facts.next(), mult(mult(b,c),d)), "4! = 24")
     self.assertTrue(eq(facts.next(), mult(mult(mult(b,c),d),e)), "4! = 120")
+
+class TestPrimes(unittest.TestCase):
+  def testPrimes(self):
+    ps = primes()
+    two = ps.next()
+    three = ps.next()
+    five = ps.next()
+    seven = ps.next()
+    eleven = ps.next()
+    thirteen = ps.next()
+    seventeen = ps.next()
+    self.assertTrue(eq(two, next(next(zero()))), "p[0] = 2")
+    self.assertTrue(eq(three, next(two)), "p[1] = p[0]+1 = 3")
+    self.assertTrue(eq(five, add(two, three)), "p[2]=p[0]+p[1]=5")
+    self.assertTrue(eq(seven, add(two, five)), "p[3]=p[0]+p[2]=7")
+    self.assertTrue(eq(eleven, prev(add(five, seven))), "p[4]=p[2]+p[3]-1=11")
+    self.assertTrue(eq(thirteen, next(add(five, seven))), "p[5]=p[2]+p[3]+1=13")
+    self.assertTrue(eq(seventeen, prev(add(seven, eleven))), "p[6]=p[3]+p[5]-1=17")
 
 unittest.main()
