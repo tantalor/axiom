@@ -42,9 +42,6 @@ def dist(left, right):
   """Distance between left and right."""
   step = lambda (l, r): (prev(l), prev(r))
   for (left, right) in compose(step, (left, right)):
-    if is_zero(left) and is_zero(right):
-      return zero()
-    # one of them is zero
     if is_zero(left): return right
     if is_zero(right): return left
 
