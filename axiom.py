@@ -83,7 +83,7 @@ def multiples(n):
   return compose(lambda m: add(m,n), n)
 
 def div(n, d):
-  """Quotient (q) and remainder (r) such that q*n+r = d"""
+  """Returns (q, r) such that q * n + r = d and r < n"""
   if is_zero(d):
       raise Exception("Cannot divide by zero")
   for q in counting():
