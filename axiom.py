@@ -113,18 +113,24 @@ def fact():
 def primes():
   """Yields prime numbers."""
   known = list() # (generator, last), ...
-  for candidate in compose(next, next(next(zero()))): # 2 and up
-    is_prime = True
-    # TO DO: use a heap instead
-    for (i, (generator, last)) in enumerate(known):
-      if eq(candidate, last):
-        known[i] = (generator, generator.next())
-        is_prime = False
-    if is_prime:
-      yield candidate
-      generator = multiples(candidate)
-      generator.next() # skip to 2n
-      known.append((generator, generator.next()))
+  two = next(next(zero()))
+  three = next(two)
+  yield two
+  yield three
+  # test every 6n-1 and 6n+1
+  for six in multiples(mult(two, three)): # 6, 12, 18, etc...
+    for candidate in (prev(six), next(six)):
+      is_prime = True
+      # TO DO: use a heap instead
+      for (i, (generator, last)) in enumerate(known):
+        if eq(candidate, last):
+          known[i] = (generator, generator.next())
+          is_prime = False
+      if is_prime:
+        yield candidate
+        generator = multiples(candidate)
+        generator.next() # skip to 2n
+        known.append((generator, generator.next()))
 
 ## 5
 
