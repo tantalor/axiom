@@ -38,13 +38,6 @@ def at(g, to):
     if is_zero(t): return g.next()
     g.next()
 
-def add(left, right):
-  """Left plus right."""
-  step = lambda (left, right): (next(left), prev(right))
-  for (left, right) in compose(step, (left, right)):
-    if is_zero(right):
-      return left
-
 def dist(left, right):
   """Distance between left and right."""
   step = lambda (l, r): (prev(l), prev(r))
@@ -64,6 +57,9 @@ def gt(left, right):
 
 ## 3
 
+def add(left, right):
+  return at(compose(next, left), right)
+
 def up_to(to, g=None):
   """Yields to objects from the given generator."""
   if not g: g = counting()
@@ -74,6 +70,8 @@ def up_to(to, g=None):
 def eq(left, right):
   """True if left and right are the same values"""
   return is_zero(dist(left, right))
+
+## 4
 
 def fib():
   """Yields fibonacci numbers: 0, 1, 1, 2, 3, 5, 8, 13, etc."""
@@ -86,8 +84,6 @@ def multiples(n):
   """Yields n, 2n, 3n, 4n, etc."""
   return compose(lambda m: add(m,n), n)
 
-## 4
-
 def div(n, d):
   """Quotient (q) and remainder (r) such that q*n+r = d"""
   if is_zero(d):
@@ -99,16 +95,12 @@ def div(n, d):
       else:
         n = prev(n)
 
+## 5
+
 def mult(left, right):
   """Left times right."""
   if is_zero(right): return zero()
   return at(multiples(left), prev(right))
-
-def fact():
-  """Yields factorial numbers: 1, 1, 2, 6, 24, 120, etc."""
-  step = lambda (n, f): (next(n), mult(n, f))
-  for (n, f) in compose(step, (next(zero()), next(zero()))):
-    yield f
 
 def primes():
   """Yields prime numbers."""
@@ -118,7 +110,7 @@ def primes():
   yield two
   yield three
   # test every 6n-1 and 6n+1
-  for six in multiples(mult(two, three)): # 6, 12, 18, etc...
+  for six in multiples(add(three, three)): # 6, 12, 18, etc...
     for candidate in (prev(six), next(six)):
       is_prime = True
       # TO DO: use a heap instead
@@ -132,13 +124,19 @@ def primes():
         generator.next() # skip to 2n
         known.append((generator, generator.next()))
 
-## 5
+## 6
+
+def fact():
+  """Yields factorial numbers: 1, 1, 2, 6, 24, 120, etc."""
+  step = lambda (n, f): (next(n), mult(n, f))
+  for (n, f) in compose(step, (next(zero()), next(zero()))):
+    yield f
 
 def powers(n):
   """Yields n, n^2, n^3, etc."""
   return compose(lambda p: mult(p,n), n)
 
-## 6
+## 7
 
 def exp(b, p):
   """Left times left times left, etc. right times."""
