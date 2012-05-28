@@ -134,6 +134,15 @@ def powers(n):
   """Yields n, n^2, n^3, etc."""
   return compose(lambda p: mult(p,n), n)
 
+def pascal(k):
+  """Yields k-th row of pascal's triangle."""
+  n = k
+  p = next(zero())
+  while 1:
+    yield p
+    n = next(n)
+    (p, _) = div(mult(p, n), dist(n, k))
+
 ## 7
 
 def exp(b, p):
