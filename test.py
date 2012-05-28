@@ -236,4 +236,23 @@ class TestPascal(unittest.TestCase):
     self.assertTrue(eq(ps.next(), fifteen),    "pascal 6,4 = 15")
     self.assertTrue(eq(ps.next(), thirtyfive), "pascal 7,4 = 35")
 
+class TestChoose(unittest.TestCase):
+  def testChoose(self):
+    one = next(zero())
+    two = next(one)
+    three = next(two)
+    self.assertTrue(eq(choose(zero(), zero()), one), "0 choose 0 = 1")
+    self.assertRaises(Exception, lambda: choose(zero(), one), "0 choose 1")
+    self.assertTrue(eq(choose(one, zero()), one), "1 choose 0 = 1")
+    self.assertTrue(eq(choose(one, one), one),    "1 choose 1 = 1")
+    self.assertRaises(Exception, lambda: choose(one, two), "1 choose 2")
+    self.assertTrue(eq(choose(two, zero()), one), "2 choose 0 = 1")
+    self.assertTrue(eq(choose(two, one), two),    "2 choose 1 = 2")
+    self.assertTrue(eq(choose(two, two), one),    "2 choose 2 = 1")
+    self.assertRaises(Exception, lambda: choose(two, three), "2 choose 3")
+    self.assertTrue(eq(choose(three, zero()), one), "3 choose 0 = 1")
+    self.assertTrue(eq(choose(three, one), three),  "3 choose 1 = 3")
+    self.assertTrue(eq(choose(three, two), three),  "3 choose 2 = 3")
+    self.assertTrue(eq(choose(three, three), one),  "3 choose 3 = 1")
+
 unittest.main()

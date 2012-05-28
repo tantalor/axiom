@@ -153,5 +153,7 @@ def exp(b, p):
 
 def choose(n, k):
   """Returns n choose k."""
-  if gt(n,k):
-      raise Exception("Cannot divide by zero")
+  (positive, diff) = minus(n, k)
+  if not positive and not eq(diff, zero()):
+    raise Exception("Out of bounds")
+  return at(pascal(k), diff)
