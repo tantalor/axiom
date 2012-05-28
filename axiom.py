@@ -85,7 +85,7 @@ def multiples(n):
 def div(n, d):
   """Returns (q, r) such that q * n + r = d and r < n"""
   if is_zero(d):
-      raise Exception("Cannot divide by zero")
+    raise Exception("Cannot divide by zero")
   for q in counting():
     for r in up_to(d):
       if is_zero(n):
