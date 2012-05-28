@@ -136,11 +136,9 @@ def powers(n):
 
 def pascal(k):
   """Yields k-th row of pascal's triangle."""
-  n = k
   p = next(zero())
-  while 1:
+  for n in compose(next, next(k)):
     yield p
-    n = next(n)
     (p, _) = div(mult(p, n), dist(n, k))
 
 ## 7
