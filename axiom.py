@@ -148,5 +148,10 @@ def exp(b, p):
   if is_zero(p) and is_zero(b):
     raise Exception("Cannot raise zero to zero")
   if is_zero(p):
-      return next(zero())
+    return next(zero())
   return at(powers(b), prev(p))
+
+def choose(n, k):
+  """Returns n choose k."""
+  if gt(n,k):
+      raise Exception("Cannot divide by zero")
