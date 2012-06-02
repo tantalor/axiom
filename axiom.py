@@ -141,6 +141,16 @@ def pascal_column(k):
     yield p
     (p, _) = div(mult(p, n), dist(n, k))
 
+def pascal_row(n):
+  """Yields n-th row of pascal's triangle."""
+  p = next(zero())
+  k = zero()
+  while not is_zero(p):
+    yield p
+    diff = dist(n, k)
+    k = next(k)
+    (p, _) = div(mult(p,diff), k)
+
 ## 7
 
 def exp(b, p):

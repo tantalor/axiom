@@ -236,6 +236,47 @@ class TestPascalColumn(unittest.TestCase):
     self.assertTrue(eq(ps.next(), fifteen),    "6 choose 4 = 15")
     self.assertTrue(eq(ps.next(), thirtyfive), "7 choose 4 = 35")
 
+class TestPascalRow(unittest.TestCase):
+  def testZero(self):
+    ps = list(pascal_row(zero()))
+    one = next(zero())
+    self.assertEquals(len(ps), 1)
+    self.assertTrue(eq(ps[0], one), "0 choose 0 = 1")
+  def testOne(self):
+    one = next(zero())
+    ps =  list(pascal_row(one))
+    self.assertEquals(len(ps), 2)
+    self.assertTrue(eq(ps[0], one), "1 choose 0 = 1")
+    self.assertTrue(eq(ps[1], one), "1 choose 1 = 1")
+  def testTwo(self):
+    one = next(zero())
+    two = next(one)
+    ps =  list(pascal_row(two))
+    self.assertEquals(len(ps), 3)
+    self.assertTrue(eq(ps[0], one), "2 choose 0 = 1")
+    self.assertTrue(eq(ps[1], two), "2 choose 1 = 2")
+    self.assertTrue(eq(ps[2], one), "2 choose 2 = 1")
+  def testThree(self):
+    one = next(zero())
+    three = next(next(one))
+    ps =  list(pascal_row(three))
+    self.assertEquals(len(ps), 4)
+    self.assertTrue(eq(ps[0], one),   "3 choose 0 = 1")
+    self.assertTrue(eq(ps[1], three), "3 choose 1 = 3")
+    self.assertTrue(eq(ps[2], three), "3 choose 2 = 3")
+    self.assertTrue(eq(ps[3], one),   "3 choose 3 = 1")
+  def testFour(self):
+    one = next(zero())
+    four = next(next(next(one)))
+    six = next(next(four))
+    ps = list(pascal_row(four))
+    self.assertEquals(len(ps), 5)
+    self.assertTrue(eq(ps[0], one),  "4 choose 0 = 1")
+    self.assertTrue(eq(ps[1], four), "4 choose 1 = 4")
+    self.assertTrue(eq(ps[2], six),  "4 choose 2 = 6")
+    self.assertTrue(eq(ps[3], four), "4 choose 3 = 4")
+    self.assertTrue(eq(ps[4], one),  "4 choose 4 = 1")
+
 class TestChoose(unittest.TestCase):
   def testChoose(self):
     one = next(zero())
