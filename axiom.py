@@ -134,8 +134,8 @@ def powers(n):
   """Yields n, n^2, n^3, etc."""
   return compose(lambda p: mult(p,n), n)
 
-def pascal(k):
-  """Yields k-th row of pascal's triangle."""
+def pascal_column(k):
+  """Yields k-th column of pascal's triangle."""
   p = next(zero())
   for n in compose(next, next(k)):
     yield p
@@ -156,4 +156,4 @@ def choose(n, k):
   (positive, diff) = minus(n, k)
   if not positive and not eq(diff, zero()):
     raise Exception("Out of bounds")
-  return at(pascal(k), diff)
+  return at(pascal_column(k), diff)

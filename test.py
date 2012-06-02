@@ -187,9 +187,9 @@ class TestPrimes(unittest.TestCase):
     self.assertTrue(eq(thirteen, next(add(five, seven))), "p[5]=p[2]+p[3]+1=13")
     self.assertTrue(eq(seventeen, prev(add(seven, eleven))), "p[6]=p[3]+p[5]-1=17")
 
-class TestPascal(unittest.TestCase):
+class TestPascalColumn(unittest.TestCase):
   def testZero(self):
-    ps = pascal(zero())
+    ps = pascal_column(zero())
     one = next(zero())
     self.assertTrue(eq(ps.next(), one), "pascal 0,0 = 1")
     self.assertTrue(eq(ps.next(), one), "pascal 1,0 = 1")
@@ -200,7 +200,7 @@ class TestPascal(unittest.TestCase):
     two = next(one)
     three = next(two)
     four = next(three)
-    ps = pascal(prev(two))
+    ps = pascal_column(prev(two))
     self.assertTrue(eq(ps.next(), one),   "pascal 1,1 = 1")
     self.assertTrue(eq(ps.next(), two),   "pascal 2,1 = 2")
     self.assertTrue(eq(ps.next(), three), "pascal 3,1 = 3")
@@ -210,7 +210,7 @@ class TestPascal(unittest.TestCase):
     three = next(next(one))
     six = add(three, three)
     ten = next(mult(three, three))
-    ps = pascal(prev(three))
+    ps = pascal_column(prev(three))
     self.assertTrue(eq(ps.next(), one),   "pascal 2,2 = 1")
     self.assertTrue(eq(ps.next(), three), "pascal 3,2 = 3")
     self.assertTrue(eq(ps.next(), six),   "pascal 4,2 = 6")
@@ -220,7 +220,7 @@ class TestPascal(unittest.TestCase):
     four = next(next(next(one)))
     ten = next(next(add(four,four)))
     twenty = add(ten,ten)
-    ps = pascal(prev(four))
+    ps = pascal_column(prev(four))
     self.assertTrue(eq(ps.next(), one),    "pascal 3,3 = 1")
     self.assertTrue(eq(ps.next(), four),   "pascal 4,3 = 4")
     self.assertTrue(eq(ps.next(), ten),    "pascal 5,3 = 10")
@@ -230,7 +230,7 @@ class TestPascal(unittest.TestCase):
     five = next(next(next(next(one))))
     fifteen = add(add(five,five),five)
     thirtyfive = add(add(fifteen, fifteen), five)
-    ps = pascal(prev(five))
+    ps = pascal_column(prev(five))
     self.assertTrue(eq(ps.next(), one),        "pascal 4,4 = 1")
     self.assertTrue(eq(ps.next(), five),       "pascal 5,4 = 5")
     self.assertTrue(eq(ps.next(), fifteen),    "pascal 6,4 = 15")
