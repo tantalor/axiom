@@ -225,7 +225,7 @@ class TestPascalColumn(unittest.TestCase):
     self.assertTrue(eq(ps.next(), four),   "4 choose 3 = 4")
     self.assertTrue(eq(ps.next(), ten),    "5 choose 3 = 10")
     self.assertTrue(eq(ps.next(), twenty), "6 choose 3 = 20")
-  def testThree(self):
+  def testFour(self):
     one = next(zero())
     five = next(next(next(next(one))))
     fifteen = add(add(five,five),five)
