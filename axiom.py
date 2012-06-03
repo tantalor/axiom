@@ -124,12 +124,10 @@ def primes():
 
 def catalan():
   """Yields catalan numbers: 1 1 2 5 14 42 132..."""
-  n = zero()
   c = next(zero())
   two = next(next(zero()))
-  while True:
+  for n in compose(next, next(zero())):
     yield c
-    n = next(n)
     (c, _) = div(mult(c,mult(two,prev(mult(two,n)))), next(n))
 
 ## 6
