@@ -122,6 +122,16 @@ def primes():
         generator.next() # skip to 2n
         known.append((generator, generator.next()))
 
+def catalan():
+  """Yields catalan numbers: 1 1 2 5 14 42 132..."""
+  n = zero()
+  c = next(zero())
+  two = next(next(zero()))
+  while True:
+    yield c
+    n = next(n)
+    (c, _) = div(mult(c,mult(two,prev(mult(two,n)))), next(n))
+
 ## 6
 
 def fact():

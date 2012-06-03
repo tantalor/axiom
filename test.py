@@ -296,4 +296,21 @@ class TestChoose(unittest.TestCase):
     self.assertTrue(eq(choose(three, two), three),  "3 choose 2 = 3")
     self.assertTrue(eq(choose(three, three), one),  "3 choose 3 = 1")
 
+class TestCatalan(unittest.TestCase):
+  def testCatalan(self):
+    c = catalan()
+    one = next(zero())
+    two = next(one)
+    five = next(add(two,two))
+    fourteen = prev(add(add(five,five),five))
+    fourtytwo = mult(fourteen,next(two))
+    onehundredthirtytwo = add(mult(next(two),fourtytwo),next(five))
+    self.assertTrue(eq(c.next(), one))
+    self.assertTrue(eq(c.next(), one))
+    self.assertTrue(eq(c.next(), two))
+    self.assertTrue(eq(c.next(), five))
+    self.assertTrue(eq(c.next(), fourteen))
+    self.assertTrue(eq(c.next(), fourtytwo))
+    self.assertTrue(eq(c.next(), onehundredthirtytwo))
+
 unittest.main()
