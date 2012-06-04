@@ -313,4 +313,11 @@ class TestCatalan(unittest.TestCase):
     self.assertTrue(eq(c.next(), fourtytwo))
     self.assertTrue(eq(c.next(), onehundredthirtytwo))
 
+class TestGCD(unittest.TestCase):
+  def testGCD(self):
+    six = next(next(next(next(next(next(zero()))))))
+    eighteen = add(add(six, six), six)
+    fortyeight = add(add(add(eighteen, eighteen), six), six)
+    self.assertTrue(eq(gcd(eighteen, fortyeight), six), "gcd(18,48) = 6")
+
 unittest.main()

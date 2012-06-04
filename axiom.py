@@ -65,6 +65,17 @@ def up_to(to, g=None):
     if is_zero(t): return
     yield g.next()
 
+def gcd(a, b):
+  """Greatest common divisor of a, b."""
+  while True:
+    if eq(a, b):
+      return a
+    (positive, dist) = minus(a, b)
+    if positive:
+      a, b = dist, b
+    else:
+      a, b = a, dist
+
 ## 4
 
 def eq(left, right):
