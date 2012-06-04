@@ -97,9 +97,7 @@ def div(n, d):
 
 def gcd(a, b):
   """Greatest common divisor of a, b."""
-  def step((a,b)):
-    (_, r) = div(a, b)
-    return b, r
+  step = lambda (a,b): (b, div(a, b)[1])
   for (a, b) in compose(step, (a,b)):
     if is_zero(b):
       return a
