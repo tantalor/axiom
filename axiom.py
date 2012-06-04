@@ -65,18 +65,6 @@ def up_to(to, g=None):
     if is_zero(t): return
     yield g.next()
 
-def gcd(a, b):
-  """Greatest common divisor of a, b."""
-  def step((a,b)):
-    (positive, dist) = minus(a, b)
-    if positive:
-      return dist, b
-    else:
-      return a, dist
-  for (a, b) in compose(step, (a,b)):
-    if eq(a, b):
-      return a
-
 ## 4
 
 def eq(left, right):
@@ -106,6 +94,15 @@ def div(n, d):
         n = prev(n)
 
 ## 5
+
+def gcd(a, b):
+  """Greatest common divisor of a, b."""
+  def step((a,b)):
+    (_, r) = div(a, b)
+    return b, r
+  for (a, b) in compose(step, (a,b)):
+    if is_zero(b):
+      return a
 
 def mult(left, right):
   """Left times right."""
