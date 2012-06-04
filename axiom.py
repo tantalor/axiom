@@ -67,14 +67,15 @@ def up_to(to, g=None):
 
 def gcd(a, b):
   """Greatest common divisor of a, b."""
-  while True:
-    if eq(a, b):
-      return a
+  def step((a,b)):
     (positive, dist) = minus(a, b)
     if positive:
-      a, b = dist, b
+      return dist, b
     else:
-      a, b = a, dist
+      return a, dist
+  for (a, b) in compose(step, (a,b)):
+    if eq(a, b):
+      return a
 
 ## 4
 
