@@ -159,16 +159,6 @@ def pascal_column(k):
 def pascal_row(n):
   """Yields n-th row of pascal's triangle."""
   p = next(zero())
-  k = zero()
-  while not is_zero(p):
-    yield p
-    diff = dist(n, k)
-    k = next(k)
-    (p, _) = div(mult(p,diff), k)
-
-def pascal_row(n):
-  """Yields n-th row of pascal's triangle."""
-  p = next(zero())
   for k in counting():
     yield p
     p = div(mult(p,dist(n, k)), next(k))[0]
