@@ -166,6 +166,14 @@ def pascal_row(n):
     k = next(k)
     (p, _) = div(mult(p,diff), k)
 
+def pascal_row(n):
+  """Yields n-th row of pascal's triangle."""
+  p = next(zero())
+  for k in counting():
+    yield p
+    p = div(mult(p,dist(n, k)), next(k))[0]
+    if is_zero(p): return
+
 ## 7
 
 def exp(b, p):
