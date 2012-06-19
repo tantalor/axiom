@@ -177,6 +177,6 @@ def exp(b, p):
 def choose(n, k):
   """Returns n choose k."""
   (positive, diff) = minus(n, k)
-  if not positive and not eq(diff, zero()):
+  if not positive and not is_zero(diff):
     raise Exception("Out of bounds")
   return at(pascal_column(k), diff)
