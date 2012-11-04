@@ -180,3 +180,12 @@ def choose(n, k):
   if not positive and not is_zero(diff):
     raise Exception("Out of bounds")
   return at(pascal_column(k), diff)
+
+def root(n, p):
+  """Returns (b, r) such that n = b ^ p + r."""
+  step = lambda (b, bp, last): (next(b), at(powers(next(b)), prev(p)), bp)
+  for b, bp, last in compose(step, (zero(), zero(), zero())):
+    if eq(bp, n):
+      return b, zero()
+    if gt(bp, n):
+      return prev(b), dist(last, n)

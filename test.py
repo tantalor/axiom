@@ -313,6 +313,38 @@ class TestCatalan(unittest.TestCase):
     self.assertTrue(eq(c.next(), fourtytwo))
     self.assertTrue(eq(c.next(), onehundredthirtytwo))
 
+class TestRoot(unittest.TestCase):
+  def testSquareRoots(self):
+    one = next(zero())
+    two = next(one)
+    three = next(two)
+    four = next(three)
+    five = next(four)
+    six = next(five)
+    seven = next(six)
+    eight = next(seven)
+    nine = next(eight)
+    (b, r) = root(zero(), two)
+    self.assertTrue(is_zero(b) and is_zero(r), "0 = (0)^2 + (0)")
+    (b, r) = root(one, two)
+    self.assertTrue(eq(b,one) and is_zero(r), "1 = (1)^2 + (0)")
+    (b, r) = root(two, two)
+    self.assertTrue(eq(b,one) and eq(r,one), "2 = (1)^2 + (1)")
+    (b, r) = root(three, two)
+    self.assertTrue(eq(b,one) and eq(r,two), "3 = (1)^2 + (2)")
+    (b, r) = root(four, two)
+    self.assertTrue(eq(b,two) and is_zero(r), "4 = (2)^2 + (0)")
+    (b, r) = root(five, two)
+    self.assertTrue(eq(b,two) and eq(r,one), "5 = (2)^2 + (1)")
+    (b, r) = root(six, two)
+    self.assertTrue(eq(b,two) and eq(r,two), "6 = (2)^2 + (2)")
+    (b, r) = root(seven, two)
+    self.assertTrue(eq(b,two) and eq(r,three), "7 = (2)^2 + (3)")
+    (b, r) = root(eight, two)
+    self.assertTrue(eq(b,two) and eq(r,four), "8 = (2)^2 + (4)")
+    (b, r) = root(nine, two)
+    self.assertTrue(eq(b,three) and is_zero(r), "9 = (2)^3 + (0)")
+
 class TestGCD(unittest.TestCase):
   def testGCD(self):
     six = next(next(next(next(next(next(zero()))))))
