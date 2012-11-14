@@ -109,19 +109,25 @@ class TestMultiples(unittest.TestCase):
 
 class TestPowers(unittest.TestCase):
   def testPowersOfZero(self):
+    one = next(zero())
     ps = powers(zero())
+    self.assertTrue(eq(ps.next(), one), "0^0 = 1")
     self.assertTrue(eq(ps.next(), zero()), "0^1 = 0")
     self.assertTrue(eq(ps.next(), zero()), "0^2 = 0")
     self.assertTrue(eq(ps.next(), zero()), "0^3 = 0")
   def testPowersOfOne(self):
-    ps = powers(next(zero()))
-    self.assertTrue(eq(ps.next(), next(zero())), "1^1 = 1")
-    self.assertTrue(eq(ps.next(), next(zero())), "1^2 = 1")
-    self.assertTrue(eq(ps.next(), next(zero())), "1^3 = 1")
+    one = next(zero())
+    ps = powers(one)
+    self.assertTrue(eq(ps.next(), one), "1^0 = 1")
+    self.assertTrue(eq(ps.next(), one), "1^1 = 1")
+    self.assertTrue(eq(ps.next(), one), "1^2 = 1")
+    self.assertTrue(eq(ps.next(), one), "1^3 = 1")
   def testPowers(self):
-    three = next(next(next(zero())))
+    one = next(zero())
+    three = next(next(one))
     ps = powers(three)
-    self.assertTrue(eq(ps.next(), three), "3^1 = 1")
+    self.assertTrue(eq(ps.next(), one), "3^0 = 1")
+    self.assertTrue(eq(ps.next(), three), "3^1 = 3")
     self.assertTrue(eq(ps.next(), mult(three, three)), "3^2 = 9")
     self.assertTrue(eq(ps.next(), mult(mult(three, three), three)), "3^3 = 27")
 

@@ -146,8 +146,8 @@ def fact():
     yield f
 
 def powers(n):
-  """Yields n, n^2, n^3, etc."""
-  return compose(lambda p: mult(p,n), n)
+  """Yields n^0, n^1, n^2, n^3, etc."""
+  return compose(lambda p: mult(p,n), next(zero()))
 
 def pascal_column(k):
   """Yields k-th column of pascal's triangle."""
@@ -168,11 +168,7 @@ def pascal_row(n):
 
 def exp(b, p):
   """Left times left times left, etc. right times."""
-  if is_zero(p) and is_zero(b):
-    raise Exception("Cannot raise zero to zero")
-  if is_zero(p):
-    return next(zero())
-  return at(powers(b), prev(p))
+  return at(powers(b), p)
 
 def choose(n, k):
   """Returns n choose k."""
@@ -181,9 +177,11 @@ def choose(n, k):
     raise Exception("Out of bounds")
   return at(pascal_column(k), diff)
 
+## 8
+  
 def root(n, p):
   """Returns (b, r) such that n = b ^ p + r."""
-  step = lambda (b, bp, last): (next(b), at(powers(next(b)), prev(p)), bp)
+  step = lambda (b, bp, last): (next(b), exp(next(b), p), bp)
   for b, bp, last in compose(step, (zero(), zero(), zero())):
     if eq(bp, n):
       return b, zero()
