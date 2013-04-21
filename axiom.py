@@ -2,7 +2,7 @@
 
 def compose(step, arg):
   """Yields arg, step(arg), step(step(arg)), etc."""
-  while True:
+  while arg is not None:
     yield arg
     arg = step(arg)
 
@@ -158,11 +158,15 @@ def pascal_column(k):
 
 def pascal_row(n):
   """Yields n-th row of pascal's triangle."""
-  p = next(zero())
-  for k in counting():
-    yield p
-    p = div(mult(p,dist(n, k)), next(k))[0]
-    if is_zero(p): return
+  c = counting()
+  def step(t):
+    k = c.next()
+    t = div(mult(t, dist(n, k)), next(k))[0]
+    if is_zero(t): return
+    return t
+  
+  first = next(zero())
+  return compose(step, first)
 
 ## 7
 
