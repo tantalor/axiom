@@ -1,10 +1,17 @@
 ## 0 (universe)
 
-def compose(step, arg):
+def compose(step, *args):
   """Yields arg, step(arg), step(step(arg)), etc."""
-  while arg is not None:
-    yield arg
-    arg = step(arg)
+  if len(args) > 1:
+    while args is not None:
+      yield args[0]
+      args = step(*args)
+  else:
+    (arg,) = args
+    while arg is not None:
+      yield arg
+      arg = step(arg)
+      
 
 ## 1 (axioms)
 
@@ -158,15 +165,13 @@ def pascal_column(k):
 
 def pascal_row(n):
   """Yields n-th row of pascal's triangle."""
-  c = counting()
-  def step(t):
-    k = c.next()
-    t = div(mult(t, dist(n, k)), next(k))[0]
-    if is_zero(t): return
-    return t
-  
-  first = next(zero())
-  return compose(step, first)
+  return compose(_pascal_row_step, next(zero()), zero(), n)
+
+def _pascal_row_step(t, k, n):
+  k2 = next(k)
+  t2, _ = div(mult(t, dist(n, k)), k2)
+  if not is_zero(t2):
+    return (t2, k2, n)
 
 ## 7
 
